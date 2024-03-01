@@ -16,24 +16,24 @@
   <meta name="author" content="donglixia">
   <meta name="keywords" content="">
   
-    <meta name="description" content="看到这句话而看不到图片，说明图片有问题 1 进程、线程概念 Java中，启动main函数时其实就是启动了一个JVM进程，main函数所在的线程就是这个进程中的一个线程，也称为主线程。 一个Java程序的运行是main线程和多个其他线程同时运行。 同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈。  1.1 从JVM角度看进程和线程   线程是进程划分成的更">
+    <meta name="description" content="1 进程、线程概念 Java中，启动main函数时其实就是启动了一个JVM进程，main函数所在的线程就是这个进程中的一个线程，也称为主线程。 一个Java程序的运行是main线程和多个其他线程同时运行。 同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈。  1.1 从JVM角度看进程和线程   线程是进程划分成的更小的运行单位。 进程是独立的，线程则不一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发（上）">
 <meta property="og:url" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
 <meta property="og:site_name" content="东篱下">
-<meta property="og:description" content="看到这句话而看不到图片，说明图片有问题 1 进程、线程概念 Java中，启动main函数时其实就是启动了一个JVM进程，main函数所在的线程就是这个进程中的一个线程，也称为主线程。 一个Java程序的运行是main线程和多个其他线程同时运行。 同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈。  1.1 从JVM角度看进程和线程   线程是进程划分成的更">
+<meta property="og:description" content="1 进程、线程概念 Java中，启动main函数时其实就是启动了一个JVM进程，main函数所在的线程就是这个进程中的一个线程，也称为主线程。 一个Java程序的运行是main线程和多个其他线程同时运行。 同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈。  1.1 从JVM角度看进程和线程   线程是进程划分成的更小的运行单位。 进程是独立的，线程则不一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/java-runtime-data-areas-jdk1.8.png">
-<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/image-20240206162405236.png">
-<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/image-20240206204346161.png">
-<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/jmm.png">
-<meta property="og:image" content="http://example.com/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89%5Cimage-20240218174821049.png">
+<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/java-runtime-data-areas-jdk1.8.png">
+<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/image-20240206162405236.png">
+<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/image-20240206204346161.png">
+<meta property="og:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/jmm.png">
+<meta property="og:image" content="http://example.com/image-20240218174821049.png">
 <meta property="article:published_time" content="2023-02-01T02:37:41.000Z">
-<meta property="article:modified_time" content="2024-03-01T02:54:24.159Z">
+<meta property="article:modified_time" content="2024-03-01T03:03:38.837Z">
 <meta property="article:author" content="donglixia">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/java-runtime-data-areas-jdk1.8.png">
+<meta name="twitter:image" content="http://example.com/2023/02/01/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89/java-runtime-data-areas-jdk1.8.png">
   
   
   
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.9k 字
+          6.8k 字
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          58 分钟
+          57 分钟
         
       </span>
     
@@ -316,13 +316,12 @@
             
               <div class="markdown-body">
                 
-                <p><strong>看到这句话而看不到图片，说明图片有问题</strong></p>
-<h1 id="1-进程、线程概念"><a href="#1-进程、线程概念" class="headerlink" title="1 进程、线程概念"></a>1 进程、线程概念</h1><ul>
+                <h1 id="1-进程、线程概念"><a href="#1-进程、线程概念" class="headerlink" title="1 进程、线程概念"></a>1 进程、线程概念</h1><ul>
 <li>Java中，启动<code>main</code>函数时其实就是启动了一个JVM进程，<code>main</code>函数所在的线程就是这个进程中的一个线程，也称为主线程。</li>
 <li>一个Java程序的运行是main线程和多个其他线程同时运行。</li>
 <li>同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区资源</strong>，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>。</li>
 </ul>
-<h2 id="1-1-从JVM角度看进程和线程"><a href="#1-1-从JVM角度看进程和线程" class="headerlink" title="1.1 从JVM角度看进程和线程"></a>1.1 从JVM角度看进程和线程</h2><img src=".\并发（上）\java-runtime-data-areas-jdk1.8.png" srcset="/img/loading.gif" lazyload alt="Java 运行时数据区域（JDK1.8 之后）" style="zoom: 67%;" />
+<h2 id="1-1-从JVM角度看进程和线程"><a href="#1-1-从JVM角度看进程和线程" class="headerlink" title="1.1 从JVM角度看进程和线程"></a>1.1 从JVM角度看进程和线程</h2><img src="java-runtime-data-areas-jdk1.8.png" srcset="/img/loading.gif" lazyload alt="Java 运行时数据区域（JDK1.8 之后）" style="zoom: 67%;" />
 
 <ul>
 <li>线程是进程划分成的更小的运行单位。</li>
@@ -347,7 +346,7 @@
 <p>用户线程创建和切换成本低，但不可以利用多核；内核态线程，创建和切换成本高，可以利用多核。</p>
 <p><strong>现在的Java线程本质其实就是操作系统的线程。</strong>                                                                                                       </p>
 <p>常见三种线程模型：</p>
-<img src=".\并发（上）\image-20240206162405236.png" srcset="/img/loading.gif" lazyload alt="image-20240206162405236" style="zoom:50%;" />
+<img src="image-20240206162405236.png" srcset="/img/loading.gif" lazyload alt="image-20240206162405236" style="zoom:50%;" />
 
 <p>在Windows和Linux系统中，Java线程采用一对一的线程模型，<em>Solaris系统</em> 是一个特例，HotSpot VM在Solaris上支持多对多和一对一。</p>
 <h1 id="3-同步和异步的区别"><a href="#3-同步和异步的区别" class="headerlink" title="3 同步和异步的区别"></a>3 同步和异步的区别</h1><p><strong>同步：</strong>发出一个调用后，没有得到结果之前，该调用就不可以返回，一直等待。</p>
@@ -379,7 +378,7 @@
 <li><strong>TIME_WAITING</strong>：超时等待状态，可以在指定的时间后自行返回而不是像 WAITING 那样一直等待。</li>
 <li><strong>TERMINATED</strong>：终止状态，表示该线程已经运行完毕。</li>
 </ul>
-<img src=".\并发（上）\image-20240206204346161.png" srcset="/img/loading.gif" lazyload alt="image-20240206204346161" style="zoom:67%;" />
+<img src="image-20240206204346161.png" srcset="/img/loading.gif" lazyload alt="image-20240206204346161" style="zoom:67%;" />
 
 <ul>
 <li>在操作系统层面，线程有READY和RUNNING状态（READY的线程获得CPU时间片后就处于RUNNING状态）；而在JVM层面，只有RUNNABLE状态。</li>
@@ -427,7 +426,7 @@
 <p><strong>可见性</strong>：每一个线程都保存了自己所使用的变量的副本，当修改某个变量的值时，不一定会立刻将修改写回主存，这就可能导致其他线程无法立即看到该变量的最新值，从而造成可见性问题。</p>
 </blockquote>
 <p><code>volatile</code>关键字可以保证变量的可见性，声明为<code>volatile</code>的变量将告诉JVM，这个变量是共享且不稳定的，<strong>每次</strong>使用它都需要到<strong>主存</strong>中进行读取。</p>
-<img src=".\并发（上）\jmm.png" srcset="/img/loading.gif" lazyload alt="JMM(Java 内存模型)" style="zoom: 80%;" />
+<img src="jmm.png" srcset="/img/loading.gif" lazyload alt="JMM(Java 内存模型)" style="zoom: 80%;" />
 
 <p><code>volatile</code>关键字最原始的意义是禁用CPU缓存。能保证数据的可见性，但不能保证数据的原子性，<code>synchronized</code>关键字既能保证可见性也能保证原子性。</p>
 <p><strong>如何禁止指令重排序</strong></p>
@@ -528,7 +527,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SynchronizedDemo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;synchronized 代码块&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>使用<code>monitorenter</code>和<code>monitorexit</code>指令实现。</p>
-<p><strong><img src="/%E5%B9%B6%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89%5Cimage-20240218174821049.png" srcset="/img/loading.gif" lazyload alt="image-20240218174821049"></strong></p>
+<p><strong><img src="/image-20240218174821049.png" srcset="/img/loading.gif" lazyload alt="image-20240218174821049"></strong></p>
 <p>通过字节码可以看到，同步代码块使用了一个<code>monitorenter</code>和两个<code>monitorexit</code>，<code>monitorenter</code>指明同步代码块开始位置，<code>monitorexit</code>指明结束位置。需要两个<code>monitorexit</code>是为了保证代码在正常执行及异常情况下都能被正确释放。</p>
 <p>执行<code>monitorenter</code>指令，线程将尝试获取锁也就是获取对象监视器<code>monitor</code>的持有权。</p>
 <blockquote>
@@ -644,6 +643,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
     <div class="post-meta">
