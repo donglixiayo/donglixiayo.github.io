@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>LeetCode刷题笔记（1-10）</title>
+    <link href="/2024/03/01/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%EF%BC%881-10%EF%BC%89/"/>
+    <url>/2024/03/01/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%EF%BC%881-10%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h1><p><a href="https://leetcode.cn/problems/add-two-numbers/description/">2. 两数相加 - 力扣（LeetCode）</a></p><p><strong>Description</strong></p><p>给定两个非空的链表，每个链表节点存储一位数字，整个链表表示两个非负整数（链表从头到尾表示从数字从个位到高位）。</p><p>要求返回两个数字的和，用同样的链表形式。</p><p><strong>Solution</strong></p><p>即实现简单的加法器：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">addTwoNumbers</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(-<span class="hljs-number">1</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pr1</span> <span class="hljs-operator">=</span> l1, pr2 = l2, pr3 = res;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">carry</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//进位</span><br>        <span class="hljs-keyword">while</span> (pr1 != <span class="hljs-literal">null</span> || pr2 != <span class="hljs-literal">null</span> || carry != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            sum += carry;<br>            <span class="hljs-keyword">if</span> (pr1 != <span class="hljs-literal">null</span>) &#123;<br>                sum += pr1.val;<br>                pr1 = pr1.next;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (pr2 != <span class="hljs-literal">null</span>) &#123;<br>                sum += pr2.val;<br>                pr2 = pr2.next;<br>            &#125;<br>            carry = sum / <span class="hljs-number">10</span>;<br>            sum = sum % <span class="hljs-number">10</span>;<br>            pr3.next = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(sum);<br>            pr3 = pr3.next; <br>        &#125;<br>        <span class="hljs-keyword">return</span> res.next;<br>    &#125;<br></code></pre></td></tr></table></figure><p><strong>Tips</strong></p><ul><li>如Solution所示，可以只使用一个<code>while</code>循环。</li></ul><h1 id="4-寻找两个正序数组的中位数"><a href="#4-寻找两个正序数组的中位数" class="headerlink" title="4. 寻找两个正序数组的中位数"></a>4. 寻找两个正序数组的中位数</h1><p><strong>Description</strong></p><p>给定两个大小不同的数组（已经非严格从大到小排序），返回两个数组中所有元素的中位数。</p><p><strong>Solution</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>nSum问题</title>
     <link href="/2024/03/01/nSum%E9%97%AE%E9%A2%98/"/>
     <url>/2024/03/01/nSum%E9%97%AE%E9%A2%98/</url>
