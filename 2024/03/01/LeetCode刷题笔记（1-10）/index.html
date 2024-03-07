@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://example.com/....%5Csource%5Cimages%5Cimage-20240306165748978.png">
 <meta property="og:image" content="http://example.com/....%5Csource%5Cimages%5Cimage-20240306165917898.png">
 <meta property="article:published_time" content="2024-03-01T09:19:12.000Z">
-<meta property="article:modified_time" content="2024-03-07T08:58:11.213Z">
+<meta property="article:modified_time" content="2024-03-07T10:06:56.047Z">
 <meta property="article:author" content="donglixia">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,7 +254,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.9k 字
         
       </span>
     
@@ -265,7 +265,7 @@
         
         
         
-          12 分钟
+          16 分钟
         
       </span>
     
@@ -398,6 +398,37 @@ private double findKth(int[] nums1, int start1, int end1, int[] nums2, int start
 <li>使用增强<code>for</code>循环遍历<code>String</code>类型时，需要调用<code>String.toCharArray()</code>方法。</li>
 <li>需要频繁修改字符串时，使用<code>StringBuilder</code>而不是<code>String</code>。</li>
 </ul>
+<h1 id="7-整数反转"><a href="#7-整数反转" class="headerlink" title="7. 整数反转"></a>7. 整数反转</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-integer/description/">7. 整数反转 - 力扣（LeetCode）</a></p>
+<p><strong>Description</strong></p>
+<p>给定一个int类型整数，要求反转该整数并返回int类型的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 <code>[−231, 231 − 1]</code> ，就返回 0。</p>
+<p>假设环境不允许存储64位整数（即不允许使用long类型）</p>
+<p><strong>Solution</strong></p>
+<ul>
+<li><p>通过取余运算每次取出参数的最低位，放入结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> x % <span class="hljs-number">10</span>;<br>            x = x / <span class="hljs-number">10</span>;<br>            <span class="hljs-keyword">if</span> (res &gt; Integer.MAX_VALUE/<span class="hljs-number">10</span> || (res==Integer.MAX_VALUE/<span class="hljs-number">10</span> &amp;&amp; temp&gt;<span class="hljs-number">7</span>)) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (res &lt; Integer.MIN_VALUE/<span class="hljs-number">10</span> || (res==Integer.MIN_VALUE/<span class="hljs-number">10</span>) &amp;&amp; temp&lt;-<span class="hljs-number">8</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            res = res * <span class="hljs-number">10</span> + temp;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>Tips</strong></p>
+<ul>
+<li><p>由于不能使用long类型，判断反转后的结果是否越界应当在最高位还未形成时进行。</p>
+<p>32位有符号整数能够存储的最大正数为<code>2147483647</code>，最小负数为<code>-2147483648</code>。</p>
+<ul>
+<li><code>res &gt; Integer.MAX_VALUE/10</code>，该条件成立时无需查看最后一位（即个位）的取值，即可得出越界。</li>
+<li><code>res==Integer.MAX_VALUE/10</code>，如果该条件成立，应当查看个位是否大于<code>7</code>。</li>
+<li>负数使用同样的逻辑。</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-字符串转换整数"><a href="#8-字符串转换整数" class="headerlink" title="8. 字符串转换整数"></a>8. 字符串转换整数</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/string-to-integer-atoi/description/">8. 字符串转换整数 (atoi) - 力扣（LeetCode）</a></p>
+<p><strong>Description</strong></p>
+<p>读入字符串并去掉无用的前导空格。</p>
+<p>将字符串开头的数字转换为<code>int</code>类型并返回（开头可能有正负号也可能没有）。</p>
+<p>如果字符串开头不是数字（除正负号），返回<code>0</code>。</p>
+<p>最终结果如果超过<code>int</code>类型范围，返回int类型所能表示的最大或最小整数。</p>
+<p><strong>Solution</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myAtoi</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        s = s.trim();<br>        <span class="hljs-keyword">if</span> (s.length() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isPos</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (s.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;<br>            s = s.substring(<span class="hljs-number">1</span>);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&#x27;-&#x27;</span>)&#123;<br>            isPos = <span class="hljs-literal">false</span>;<br>            s = s.substring(<span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c &lt; <span class="hljs-string">&#x27;0&#x27;</span> || c &gt; <span class="hljs-string">&#x27;9&#x27;</span>) <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">if</span> (res&gt;<span class="hljs-number">214748364</span> || (res==<span class="hljs-number">214748364</span> &amp;&amp; c&gt;<span class="hljs-string">&#x27;7&#x27;</span>)) &#123;<br>                <span class="hljs-keyword">return</span> Integer.MAX_VALUE;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (res&lt;-<span class="hljs-number">214748364</span> || (res==-<span class="hljs-number">214748364</span> &amp;&amp; c&gt;<span class="hljs-string">&#x27;8&#x27;</span>)) &#123;<br>                <span class="hljs-keyword">return</span> Integer.MIN_VALUE;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (isPos) res = res * <span class="hljs-number">10</span> + c - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">else</span> res = res * <span class="hljs-number">10</span> - c + <span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Tips</strong></p>
 
                 
               </div>
