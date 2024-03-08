@@ -23,20 +23,20 @@
 <meta property="og:site_name" content="东篱下">
 <meta property="og:description" content="1. 字符串处理1.1 遍历字符串substr(str, pos, len) length(len)  这是一切字符串处理的基础，你需要有逐字遍历字符串的能力 SQL没有Loop循环功能，我们需要有数据透视表(T1，T10，T100…) 问题：把EMP表中的ENAME&#x3D;KING的字符串拆开显示为4行，每行一个字符  12341 select substr(e.ename,iter.pos">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:\study\hexo-blog\source_posts\SQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\image-20240308152352825.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308152745736.png">
-<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2021-Database-Development/img/lec4/13.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308153741933.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308155741480.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308161210504.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163126749.png">
-<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163200640.png">
+<meta property="og:image" content="http://example.com/image-20240308152352825.png">
+<meta property="og:image" content="http://example.com/image-20240308152745736.png">
+<meta property="og:image" content="http://example.com/13.png">
+<meta property="og:image" content="http://example.com/image-20240308153741933.png">
+<meta property="og:image" content="http://example.com/image-20240308155741480.png">
+<meta property="og:image" content="http://example.com/image-20240308161210504.png">
+<meta property="og:image" content="http://example.com/image-20240308163126749.png">
+<meta property="og:image" content="http://example.com/image-20240308163200640.png">
 <meta property="article:published_time" content="2024-03-08T07:21:06.000Z">
-<meta property="article:modified_time" content="2024-03-08T08:36:23.073Z">
+<meta property="article:modified_time" content="2024-03-08T08:41:51.184Z">
 <meta property="article:author" content="donglixia">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="d:\study\hexo-blog\source_posts\SQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\image-20240308152352825.png">
+<meta name="twitter:image" content="http://example.com/image-20240308152352825.png">
   
   
   
@@ -328,7 +328,7 @@
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> substr(e.ename,iter.pos,<span class="hljs-number">1</span>) <span class="hljs-keyword">as</span> C<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> ename <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;KING&#x27;</span>) e,<br><span class="hljs-number">3</span>   (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">as</span> pos <span class="hljs-keyword">from</span> t10) iter<br><span class="hljs-number">4</span> <span class="hljs-keyword">where</span> iter.pos <span class="hljs-operator">&lt;=</span> length(e.ename)<br></code></pre></td></tr></table></figure>
 
-<p><img src="D:\study\hexo-blog\source_posts\SQL常用函数\image-20240308152352825.png" srcset="/img/loading.gif" lazyload alt="image-20240308152352825"></p>
+<p><img src="/image-20240308152352825.png" srcset="/img/loading.gif" lazyload alt="image-20240308152352825"></p>
 <h2 id="1-2-嵌入引号"><a href="#1-2-嵌入引号" class="headerlink" title="1.2 嵌入引号"></a>1.2 嵌入引号</h2><ol>
 <li>在字符串常量中嵌入引号，直接在单引号中加引号即可，不需要转义。</li>
 </ol>
@@ -343,13 +343,13 @@
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span><br>  (length(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>)<span class="hljs-operator">-</span><br>  length(replace(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>,<span class="hljs-string">&#x27;LL&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)))<span class="hljs-operator">/</span>length(<span class="hljs-string">&#x27;LL&#x27;</span>)<br>  <span class="hljs-keyword">as</span> correct_cnt,<br>  (length(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>)<span class="hljs-operator">-</span><br>  length(replace(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>,<span class="hljs-string">&#x27;LL&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>))) <span class="hljs-keyword">as</span> incorrect_cnt<br><span class="hljs-keyword">from</span> t1<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308152745736.png" srcset="/img/loading.gif" lazyload alt="image-20240308152745736"></p>
+<p><img src="/image-20240308152745736.png" srcset="/img/loading.gif" lazyload alt="image-20240308152745736"></p>
 <h2 id="1-4-删除字符"><a href="#1-4-删除字符" class="headerlink" title="1.4 删除字符"></a>1.4 删除字符</h2><p><code>TRANSLATE(string, from_chars, to_chars)</code>： 从<code>string</code>中查找<code>from_chars</code>中的字符，并将其替换为<code>to_chars</code>中对应位置的字符。<em>MySQL不支持此函数</em></p>
 <p><code>replace(string, from_char, to_char)</code>：<code>to_char</code>缺省默认为空。</p>
 <ol>
 <li>问题：从数据里删除指定的字符，从左边的结果集中的数据里删除所有的0和元音字母，并将删除后的值显示在STRIPPED1列和STRIPPED2列中，形成右边的结果集形态</li>
 </ol>
-<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2021-Database-Development/img/lec4/13.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/13.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="2">
 <li>先用TRANSLATE函数把元音字母替换成一个特殊的字符，然后使用REPLACE函数删除这个特殊字符</li>
 </ol>
@@ -365,7 +365,7 @@
 <ol>
 <li>把数据中的数字数据和字符数据分开，怎么办？</li>
 </ol>
-<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308153741933.png" srcset="/img/loading.gif" lazyload alt="image-20240308153741933"></p>
+<p><img src="/image-20240308153741933.png" srcset="/img/loading.gif" lazyload alt="image-20240308153741933"></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle MySQL不支持translate函数 */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> replace(<br><span class="hljs-number">2</span>   <span class="hljs-built_in">translate</span>(data,<span class="hljs-string">&#x27;0123456789&#x27;</span>,<span class="hljs-string">&#x27;0000000000&#x27;</span>),<span class="hljs-string">&#x27;0&#x27;</span>) ename,<br><span class="hljs-number">3</span>   to_number(<br><span class="hljs-number">5</span>     replace(<br><span class="hljs-number">6</span>     <span class="hljs-built_in">translate</span>(<span class="hljs-built_in">lower</span>(data),<br><span class="hljs-number">7</span>       <span class="hljs-string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span>,<br><span class="hljs-number">8</span>       rpad(<span class="hljs-string">&#x27;z&#x27;</span>,<span class="hljs-number">26</span>,<span class="hljs-string">&#x27;z&#x27;</span>)),<span class="hljs-string">&#x27;z&#x27;</span>)) sal<br><span class="hljs-number">9</span>   <span class="hljs-keyword">from</span> (<br><span class="hljs-number">10</span>    <span class="hljs-keyword">select</span> ename<span class="hljs-operator">||</span>sal data<br><span class="hljs-number">11</span>    <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">12</span>  )<br></code></pre></td></tr></table></figure>
 
 <h2 id="1-6-判断含有字母和数字的字符串"><a href="#1-6-判断含有字母和数字的字符串" class="headerlink" title="1.6 判断含有字母和数字的字符串"></a>1.6 判断含有字母和数字的字符串</h2><p><strong>MySQL</strong>：<code>regexp ...</code>正则表达式匹配</p>
@@ -373,7 +373,7 @@
 <ol>
 <li>问题：从表里筛选出部分行数据，筛选条件是只包含字母和数字字符</li>
 </ol>
-<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308155741480.png" srcset="/img/loading.gif" lazyload alt="image-20240308155741480"></p>
+<p><img src="/image-20240308155741480.png" srcset="/img/loading.gif" lazyload alt="image-20240308155741480"></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> data<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> V<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> data regexp <span class="hljs-string">&#x27;[^0-9a-zA-Z]&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><span class="hljs-comment">/* Oracle */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> data<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> V<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> <span class="hljs-built_in">translate</span>(<span class="hljs-built_in">lower</span>(data), <span class="hljs-string">&#x27;0123456789abcdefghijklmnopqrstuvwxyz&#x27;</span>,rpad(<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-number">36</span>,<span class="hljs-string">&#x27;a&#x27;</span>))<br><span class="hljs-number">4</span>     <span class="hljs-operator">=</span> rpad(<span class="hljs-string">&#x27;a&#x27;</span>,length(data),<span class="hljs-string">&#x27;a&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
 <h2 id="1-7-提取姓名的首字母"><a href="#1-7-提取姓名的首字母" class="headerlink" title="1.7 提取姓名的首字母"></a>1.7 提取姓名的首字母</h2><ol>
@@ -385,7 +385,7 @@
 <li>复杂的字符串操作我们一般可以通过更好的设计避免出现这样的问题。</li>
 <li>SQL处理字符串的能力非常弱鸡，且每个数据都有无法通用的内置函数。</li>
 </ul>
-<h1 id="2-数值处理"><a href="#2-数值处理" class="headerlink" title="2. 数值处理"></a>2. 数值处理</h1><p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308161210504.png" srcset="/img/loading.gif" lazyload alt="image-20240308161210504"></p>
+<h1 id="2-数值处理"><a href="#2-数值处理" class="headerlink" title="2. 数值处理"></a>2. 数值处理</h1><p><img src="/image-20240308161210504.png" srcset="/img/loading.gif" lazyload alt="image-20240308161210504"></p>
 <h2 id="2-1-计算平均值"><a href="#2-1-计算平均值" class="headerlink" title="2.1 计算平均值"></a>2.1 计算平均值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(sal) <span class="hljs-keyword">as</span> avg_sal<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> emp<br><br>AVG_SAL<br><span class="hljs-comment">----------</span><br><span class="hljs-number">2073.21429</span><br></code></pre></td></tr></table></figure>
 
 <ul>
@@ -408,10 +408,10 @@
 <ul>
 <li><code>SUM(sal) OVER (ORDER BY sal, empno)</code> 是窗口函数的语法。它在每一行上计算了当前行之前（包括当前行）的 <code>sal</code> 列的累计总和，根据 <code>sal</code> 和 <code>empno</code> 的排序顺序。</li>
 </ul>
-<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163126749.png" srcset="/img/loading.gif" lazyload alt="image-20240308163126749"></p>
+<p><img src="/image-20240308163126749.png" srcset="/img/loading.gif" lazyload alt="image-20240308163126749"></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL and PostgreSQL and SQL Server */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> e.ename, e.sal,<br><span class="hljs-number">2</span>   (<span class="hljs-keyword">select</span> <span class="hljs-built_in">sum</span>(d.sal) <span class="hljs-keyword">from</span> emp d<br><span class="hljs-number">3</span>   <span class="hljs-keyword">where</span> d.empno <span class="hljs-operator">&lt;=</span> e.empno) <span class="hljs-keyword">as</span> running_total<br><span class="hljs-number">4</span>  <span class="hljs-keyword">from</span> emp e<br><span class="hljs-number">5</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163200640.png" srcset="/img/loading.gif" lazyload alt="image-20240308163200640"></p>
+<p><img src="/image-20240308163200640.png" srcset="/img/loading.gif" lazyload alt="image-20240308163200640"></p>
 <h2 id="2-7-计算众数"><a href="#2-7-计算众数" class="headerlink" title="2.7 计算众数"></a>2.7 计算众数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> sal<br>    <span class="hljs-keyword">from</span> emp<br>  <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br>    <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal<br><br>SAL<br><span class="hljs-comment">----------</span><br><span class="hljs-number">800</span><br><span class="hljs-number">1100</span><br><span class="hljs-number">2975</span><br><span class="hljs-number">3000</span><br><span class="hljs-number">3000</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle */</span><br><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(sal)<br><span class="hljs-number">2</span>     keep(dense_rank <span class="hljs-keyword">first</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> cnt <span class="hljs-keyword">desc</span>) sal<br><span class="hljs-number">3</span>   <span class="hljs-keyword">from</span> (<br><span class="hljs-number">4</span>     <span class="hljs-keyword">select</span> sal, <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) cnt<br><span class="hljs-number">5</span>       <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">6</span>       <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span><br><span class="hljs-number">7</span>       <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal<br><span class="hljs-number">8</span>   )<br><br><span class="hljs-comment">/* MySQL and PostgreSQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> sal<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-number">4</span> <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal<br><span class="hljs-number">5</span> <span class="hljs-keyword">having</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;=</span> <span class="hljs-keyword">all</span> ( <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-number">6</span>                           <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">7</span>                           <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-number">8</span>                           <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal )<br></code></pre></td></tr></table></figure>
