@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="donglixia">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 字符串处理1.1 遍历字符串substr(str, pos, len) length(len)  这是一切字符串处理的基础，你需要有逐字遍历字符串的能力 SQL没有Loop循环功能，我们需要有数据透视表(T1，T10，T100…) 问题：把EMP表中的ENAME&#x3D;KING的字符串拆开显示为4行，每行一个字符  12341 select substr(e.ename,iter.pos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL常用函数">
+<meta property="og:url" content="http://example.com/2024/03/08/SQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="东篱下">
+<meta property="og:description" content="1. 字符串处理1.1 遍历字符串substr(str, pos, len) length(len)  这是一切字符串处理的基础，你需要有逐字遍历字符串的能力 SQL没有Loop循环功能，我们需要有数据透视表(T1，T10，T100…) 问题：把EMP表中的ENAME&#x3D;KING的字符串拆开显示为4行，每行一个字符  12341 select substr(e.ename,iter.pos">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:\study\hexo-blog\source_posts\SQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\image-20240308152352825.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308152745736.png">
+<meta property="og:image" content="https://spricoder.oss-cn-shanghai.aliyuncs.com/2021-Database-Development/img/lec4/13.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308153741933.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308155741480.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308161210504.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163126749.png">
+<meta property="og:image" content="c:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163200640.png">
+<meta property="article:published_time" content="2024-03-08T07:21:06.000Z">
+<meta property="article:modified_time" content="2024-03-08T08:36:23.073Z">
+<meta property="article:author" content="donglixia">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="d:\study\hexo-blog\source_posts\SQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\image-20240308152352825.png">
+  
+  
+  
+  <title>SQL常用函数 - 东篱下</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"NqLkpHFBS9O7Y93uzIhKoVbJ-gzGzoHsz","app_key":"zYtgzDmijXaZGw7JNyOX4Xd8","server_url":"https://nqlkphfb.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>东篱下</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SQL常用函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-08 15:21" pubdate>
+          2024年3月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SQL常用函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-字符串处理"><a href="#1-字符串处理" class="headerlink" title="1. 字符串处理"></a>1. 字符串处理</h1><h2 id="1-1-遍历字符串"><a href="#1-1-遍历字符串" class="headerlink" title="1.1 遍历字符串"></a>1.1 遍历字符串</h2><p><code>substr(str, pos, len)</code></p>
+<p><code>length(len)</code></p>
+<ol>
+<li>这是一切字符串处理的基础，你需要有逐字遍历字符串的能力</li>
+<li>SQL没有Loop循环功能，我们需要有<strong>数据透视表</strong>(T1，T10，T100…)</li>
+<li>问题：把EMP表中的ENAME&#x3D;KING的字符串拆开显示为4行，每行一个字符</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> substr(e.ename,iter.pos,<span class="hljs-number">1</span>) <span class="hljs-keyword">as</span> C<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> ename <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> ename <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;KING&#x27;</span>) e,<br><span class="hljs-number">3</span>   (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">as</span> pos <span class="hljs-keyword">from</span> t10) iter<br><span class="hljs-number">4</span> <span class="hljs-keyword">where</span> iter.pos <span class="hljs-operator">&lt;=</span> length(e.ename)<br></code></pre></td></tr></table></figure>
+
+<p><img src="D:\study\hexo-blog\source_posts\SQL常用函数\image-20240308152352825.png" srcset="/img/loading.gif" lazyload alt="image-20240308152352825"></p>
+<h2 id="1-2-嵌入引号"><a href="#1-2-嵌入引号" class="headerlink" title="1.2 嵌入引号"></a>1.2 嵌入引号</h2><ol>
+<li>在字符串常量中嵌入引号，直接在单引号中加引号即可，不需要转义。</li>
+</ol>
+<h2 id="1-3-统计字符出现次数"><a href="#1-3-统计字符出现次数" class="headerlink" title="1.3 统计字符出现次数"></a>1.3 统计字符出现次数</h2><p><code>length(str)</code></p>
+<ol>
+<li>问题：统计字符串中有多少个逗号？10,CLARK,MANAGER</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> (length(<span class="hljs-string">&#x27;10,CLARK,MANAGER&#x27;</span>)<span class="hljs-operator">-</span><br><span class="hljs-number">2</span>   length(replace(<span class="hljs-string">&#x27;10,CLARK,MANAGER&#x27;</span>,<span class="hljs-string">&#x27;,&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)))<span class="hljs-operator">/</span>length(<span class="hljs-string">&#x27;,&#x27;</span>)<br><span class="hljs-number">3</span>   <span class="hljs-keyword">as</span> cnt<br><span class="hljs-number">4</span> <span class="hljs-keyword">from</span> t1<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>问题：如何统计HELLO HELLO中出现了多少个LL</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span><br>  (length(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>)<span class="hljs-operator">-</span><br>  length(replace(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>,<span class="hljs-string">&#x27;LL&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)))<span class="hljs-operator">/</span>length(<span class="hljs-string">&#x27;LL&#x27;</span>)<br>  <span class="hljs-keyword">as</span> correct_cnt,<br>  (length(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>)<span class="hljs-operator">-</span><br>  length(replace(<span class="hljs-string">&#x27;HELLO HELLO&#x27;</span>,<span class="hljs-string">&#x27;LL&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>))) <span class="hljs-keyword">as</span> incorrect_cnt<br><span class="hljs-keyword">from</span> t1<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308152745736.png" srcset="/img/loading.gif" lazyload alt="image-20240308152745736"></p>
+<h2 id="1-4-删除字符"><a href="#1-4-删除字符" class="headerlink" title="1.4 删除字符"></a>1.4 删除字符</h2><p><code>TRANSLATE(string, from_chars, to_chars)</code>： 从<code>string</code>中查找<code>from_chars</code>中的字符，并将其替换为<code>to_chars</code>中对应位置的字符。<em>MySQL不支持此函数</em></p>
+<p><code>replace(string, from_char, to_char)</code>：<code>to_char</code>缺省默认为空。</p>
+<ol>
+<li>问题：从数据里删除指定的字符，从左边的结果集中的数据里删除所有的0和元音字母，并将删除后的值显示在STRIPPED1列和STRIPPED2列中，形成右边的结果集形态</li>
+</ol>
+<p><img src="https://spricoder.oss-cn-shanghai.aliyuncs.com/2021-Database-Development/img/lec4/13.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li>先用TRANSLATE函数把元音字母替换成一个特殊的字符，然后使用REPLACE函数删除这个特殊字符</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle and PostgreSQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> ename,<br><span class="hljs-number">2</span>     replace(<span class="hljs-built_in">translate</span>(ename,<span class="hljs-string">&#x27;AEIOU&#x27;</span>,<span class="hljs-string">&#x27;aaaaa&#x27;</span>),<span class="hljs-string">&#x27;a&#x27;</span>)<br><span class="hljs-number">3</span>     <span class="hljs-keyword">as</span> stripped1,<br><span class="hljs-number">4</span>     sal,<br><span class="hljs-number">5</span>   replace(sal,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">as</span> stripped2<br><span class="hljs-number">6</span> <span class="hljs-keyword">from</span> emp<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>没有TRANSLATE函数，那就只有做苦力活了</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL and SQL Server */</span><br><span class="hljs-number">1</span>   <span class="hljs-keyword">select</span> ename,<br><span class="hljs-number">2</span>     replace(<br><span class="hljs-number">3</span>     replace(<br><span class="hljs-number">4</span>     replace(<br><span class="hljs-number">5</span>     replace(<br><span class="hljs-number">6</span>     replace(ename,<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>),<span class="hljs-string">&#x27;E&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>),<span class="hljs-string">&#x27;I&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>),<span class="hljs-string">&#x27;O&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>),<span class="hljs-string">&#x27;U&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)<br><span class="hljs-number">7</span>     <span class="hljs-keyword">as</span> stripped1,<br><span class="hljs-number">8</span>     sal,<br><span class="hljs-number">9</span>     replace(sal,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;&#x27;</span>) stripped2<br><span class="hljs-number">10</span>  <span class="hljs-keyword">from</span> emp<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-5-分离数字和字符数据"><a href="#5-5-分离数字和字符数据" class="headerlink" title="5.5 分离数字和字符数据"></a>5.5 分离数字和字符数据</h2><p><code>translate(string, from_chars, to_chars)</code></p>
+<p><code>replace(string, from_char, to_char)</code></p>
+<ol>
+<li>把数据中的数字数据和字符数据分开，怎么办？</li>
+</ol>
+<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308153741933.png" srcset="/img/loading.gif" lazyload alt="image-20240308153741933"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle MySQL不支持translate函数 */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> replace(<br><span class="hljs-number">2</span>   <span class="hljs-built_in">translate</span>(data,<span class="hljs-string">&#x27;0123456789&#x27;</span>,<span class="hljs-string">&#x27;0000000000&#x27;</span>),<span class="hljs-string">&#x27;0&#x27;</span>) ename,<br><span class="hljs-number">3</span>   to_number(<br><span class="hljs-number">5</span>     replace(<br><span class="hljs-number">6</span>     <span class="hljs-built_in">translate</span>(<span class="hljs-built_in">lower</span>(data),<br><span class="hljs-number">7</span>       <span class="hljs-string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span>,<br><span class="hljs-number">8</span>       rpad(<span class="hljs-string">&#x27;z&#x27;</span>,<span class="hljs-number">26</span>,<span class="hljs-string">&#x27;z&#x27;</span>)),<span class="hljs-string">&#x27;z&#x27;</span>)) sal<br><span class="hljs-number">9</span>   <span class="hljs-keyword">from</span> (<br><span class="hljs-number">10</span>    <span class="hljs-keyword">select</span> ename<span class="hljs-operator">||</span>sal data<br><span class="hljs-number">11</span>    <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">12</span>  )<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-6-判断含有字母和数字的字符串"><a href="#1-6-判断含有字母和数字的字符串" class="headerlink" title="1.6 判断含有字母和数字的字符串"></a>1.6 判断含有字母和数字的字符串</h2><p><strong>MySQL</strong>：<code>regexp ...</code>正则表达式匹配</p>
+<p><strong>Oracle</strong>：<code>rpad(string, len, pad_string)</code>在<code>string</code>后填充<code>pad_string</code>直到<code>string</code>长度达到<code>len</code>。</p>
+<ol>
+<li>问题：从表里筛选出部分行数据，筛选条件是只包含字母和数字字符</li>
+</ol>
+<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308155741480.png" srcset="/img/loading.gif" lazyload alt="image-20240308155741480"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> data<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> V<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> data regexp <span class="hljs-string">&#x27;[^0-9a-zA-Z]&#x27;</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br><span class="hljs-comment">/* Oracle */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> data<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> V<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> <span class="hljs-built_in">translate</span>(<span class="hljs-built_in">lower</span>(data), <span class="hljs-string">&#x27;0123456789abcdefghijklmnopqrstuvwxyz&#x27;</span>,rpad(<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-number">36</span>,<span class="hljs-string">&#x27;a&#x27;</span>))<br><span class="hljs-number">4</span>     <span class="hljs-operator">=</span> rpad(<span class="hljs-string">&#x27;a&#x27;</span>,length(data),<span class="hljs-string">&#x27;a&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-7-提取姓名的首字母"><a href="#1-7-提取姓名的首字母" class="headerlink" title="1.7 提取姓名的首字母"></a>1.7 提取姓名的首字母</h2><ol>
+<li>问题：你想把姓名变成首字母形式，比如LeBron James, 就可以变成L.J.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL */</span><br><span class="hljs-number">1</span>   <span class="hljs-keyword">select</span> <span class="hljs-keyword">case</span><br><span class="hljs-number">2</span>     <span class="hljs-keyword">when</span> cnt <span class="hljs-operator">=</span> <span class="hljs-number">2</span> <span class="hljs-keyword">then</span><br><span class="hljs-number">3</span>       <span class="hljs-built_in">trim</span>(<span class="hljs-keyword">trailing</span> <span class="hljs-string">&#x27;.&#x27;</span> <span class="hljs-keyword">from</span><br><span class="hljs-number">4</span>         concat_ws(<span class="hljs-string">&#x27;.&#x27;</span>,<br><span class="hljs-number">5</span>         substr(substring_index(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>),<br><span class="hljs-number">6</span>         substr(name,<br><span class="hljs-number">7</span>           length(substring_index(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-number">1</span>))<span class="hljs-operator">+</span><span class="hljs-number">2</span>,<span class="hljs-number">1</span>),<br><span class="hljs-number">8</span>         substr(substring_index(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-number">-1</span>),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>),<br><span class="hljs-number">9</span>         <span class="hljs-string">&#x27;.&#x27;</span>))<br><span class="hljs-number">10</span>      <span class="hljs-keyword">else</span><br><span class="hljs-number">11</span>        <span class="hljs-built_in">trim</span>(<span class="hljs-keyword">trailing</span> <span class="hljs-string">&#x27;.&#x27;</span> <span class="hljs-keyword">from</span><br><span class="hljs-number">12</span>          concat_ws(<span class="hljs-string">&#x27;.&#x27;</span>,<br><span class="hljs-number">13</span>          substr(substring_index(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>),<br><span class="hljs-number">14</span>          substr(substring_index(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-number">-1</span>),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)<br><span class="hljs-number">15</span>          ))<br><span class="hljs-number">16</span>      <span class="hljs-keyword">end</span> <span class="hljs-keyword">as</span> initials<br><span class="hljs-number">17</span>    <span class="hljs-keyword">from</span> (<br><span class="hljs-number">18</span>      <span class="hljs-keyword">select</span> name,length(name)<span class="hljs-operator">-</span>length(replace(name,<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)) <span class="hljs-keyword">as</span> cnt<br><span class="hljs-number">19</span>        <span class="hljs-keyword">from</span> (<br><span class="hljs-number">20</span>          <span class="hljs-keyword">select</span> replace(<span class="hljs-string">&#x27;Stewie Griffin&#x27;</span>,<span class="hljs-string">&#x27;.&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">as</span> name <span class="hljs-keyword">from</span> t1<br><span class="hljs-number">21</span>        ) y<br><span class="hljs-number">22</span>    ) x<br><br><span class="hljs-comment">/* Oracle and PostgreSQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> replace(<br><span class="hljs-number">2</span>   replace(<br><span class="hljs-number">3</span>   <span class="hljs-built_in">translate</span>(replace(name, <span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-string">&#x27; &#x27;</span>),<br><span class="hljs-number">4</span>     <span class="hljs-string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span>,<br><span class="hljs-number">5</span>     rpad(<span class="hljs-string">&#x27;#&#x27;</span>,<span class="hljs-number">26</span>,<span class="hljs-string">&#x27;#&#x27;</span>) ), <span class="hljs-string">&#x27;#&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span> ),<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;.&#x27;</span> ) <span class="hljs-operator">||</span><span class="hljs-string">&#x27;.&#x27;</span><br><span class="hljs-number">6</span> <span class="hljs-keyword">from</span> t1<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-8-总结"><a href="#1-8-总结" class="headerlink" title="1.8 总结"></a>1.8 总结</h2><ul>
+<li>复杂的字符串操作我们一般可以通过更好的设计避免出现这样的问题。</li>
+<li>SQL处理字符串的能力非常弱鸡，且每个数据都有无法通用的内置函数。</li>
+</ul>
+<h1 id="2-数值处理"><a href="#2-数值处理" class="headerlink" title="2. 数值处理"></a>2. 数值处理</h1><p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308161210504.png" srcset="/img/loading.gif" lazyload alt="image-20240308161210504"></p>
+<h2 id="2-1-计算平均值"><a href="#2-1-计算平均值" class="headerlink" title="2.1 计算平均值"></a>2.1 计算平均值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(sal) <span class="hljs-keyword">as</span> avg_sal<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> emp<br><br>AVG_SAL<br><span class="hljs-comment">----------</span><br><span class="hljs-number">2073.21429</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>遇到空值将会直接忽略。</p>
+</li>
+<li><p>如果需要统计空值：</p>
+<p><code>coalesce(...)</code>：返回参数列表中第一个非空的值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* 建表 */</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t2(sal <span class="hljs-type">integer</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t2 <span class="hljs-keyword">values</span> (<span class="hljs-number">10</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t2 <span class="hljs-keyword">values</span> (<span class="hljs-number">20</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t2 <span class="hljs-keyword">values</span> (<span class="hljs-keyword">null</span>);<br><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(sal)<br>  <span class="hljs-keyword">from</span> t2;<br><span class="hljs-comment">/*	AVG(SAL)</span><br><span class="hljs-comment">	----------</span><br><span class="hljs-comment">	15		*/</span><br>	<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(<span class="hljs-built_in">coalesce</span>(sal,<span class="hljs-number">0</span>))<br>  <span class="hljs-keyword">from</span> t2;<br><span class="hljs-comment">/* 如果sal为空，则用0代替</span><br><span class="hljs-comment">AVG(COALESCE(SAL,0))</span><br><span class="hljs-comment">--------------------</span><br><span class="hljs-comment">10				*/</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-3-查找最大最小值"><a href="#2-3-查找最大最小值" class="headerlink" title="2.3 查找最大最小值"></a>2.3 查找最大最小值</h2><p><code>min(...)</code></p>
+<p><code>max(...)</code></p>
+<h2 id="2-4-求和"><a href="#2-4-求和" class="headerlink" title="2.4 求和"></a>2.4 求和</h2><p><code>sum(...)</code></p>
+<h2 id="2-5-计算行数"><a href="#2-5-计算行数" class="headerlink" title="2.5 计算行数"></a>2.5 计算行数</h2><p><code>count(*)</code></p>
+<ul>
+<li><p>计算某一列的非空个数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(comm)<br>	<span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-6-累计求和-Running-Total"><a href="#2-6-累计求和-Running-Total" class="headerlink" title="2.6 累计求和(Running Total)"></a>2.6 累计求和(Running Total)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle and DB2(MySQL已经支持了) */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> ename, sal,<br><span class="hljs-number">2</span>   <span class="hljs-built_in">sum</span>(sal) <span class="hljs-keyword">over</span> (<span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal,empno)<br><span class="hljs-number">3</span>     <span class="hljs-keyword">as</span> running_total<br><span class="hljs-number">4</span> <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">5</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-number">2</span>;<span class="hljs-comment">/*按照第二列排序*/</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>SUM(sal) OVER (ORDER BY sal, empno)</code> 是窗口函数的语法。它在每一行上计算了当前行之前（包括当前行）的 <code>sal</code> 列的累计总和，根据 <code>sal</code> 和 <code>empno</code> 的排序顺序。</li>
+</ul>
+<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163126749.png" srcset="/img/loading.gif" lazyload alt="image-20240308163126749"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* MySQL and PostgreSQL and SQL Server */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> e.ename, e.sal,<br><span class="hljs-number">2</span>   (<span class="hljs-keyword">select</span> <span class="hljs-built_in">sum</span>(d.sal) <span class="hljs-keyword">from</span> emp d<br><span class="hljs-number">3</span>   <span class="hljs-keyword">where</span> d.empno <span class="hljs-operator">&lt;=</span> e.empno) <span class="hljs-keyword">as</span> running_total<br><span class="hljs-number">4</span>  <span class="hljs-keyword">from</span> emp e<br><span class="hljs-number">5</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\Belieber\AppData\Roaming\Typora\typora-user-images\image-20240308163200640.png" srcset="/img/loading.gif" lazyload alt="image-20240308163200640"></p>
+<h2 id="2-7-计算众数"><a href="#2-7-计算众数" class="headerlink" title="2.7 计算众数"></a>2.7 计算众数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> sal<br>    <span class="hljs-keyword">from</span> emp<br>  <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br>    <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal<br><br>SAL<br><span class="hljs-comment">----------</span><br><span class="hljs-number">800</span><br><span class="hljs-number">1100</span><br><span class="hljs-number">2975</span><br><span class="hljs-number">3000</span><br><span class="hljs-number">3000</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/* Oracle */</span><br><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(sal)<br><span class="hljs-number">2</span>     keep(dense_rank <span class="hljs-keyword">first</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> cnt <span class="hljs-keyword">desc</span>) sal<br><span class="hljs-number">3</span>   <span class="hljs-keyword">from</span> (<br><span class="hljs-number">4</span>     <span class="hljs-keyword">select</span> sal, <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) cnt<br><span class="hljs-number">5</span>       <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">6</span>       <span class="hljs-keyword">where</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span><br><span class="hljs-number">7</span>       <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal<br><span class="hljs-number">8</span>   )<br><br><span class="hljs-comment">/* MySQL and PostgreSQL */</span><br><span class="hljs-number">1</span> <span class="hljs-keyword">select</span> sal<br><span class="hljs-number">2</span>   <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">3</span> <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-number">4</span> <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal<br><span class="hljs-number">5</span> <span class="hljs-keyword">having</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;=</span> <span class="hljs-keyword">all</span> ( <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-number">6</span>                           <span class="hljs-keyword">from</span> emp<br><span class="hljs-number">7</span>                           <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-number">8</span>                           <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> sal )<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-8-计算中位数"><a href="#2-8-计算中位数" class="headerlink" title="2.8 计算中位数"></a>2.8 计算中位数</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SQL/" class="category-chain-item">SQL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SQL常用函数</div>
+      <div>http://example.com/2024/03/08/SQL常用函数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>donglixia</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/01/LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0%EF%BC%881-10%EF%BC%89/" title="LeetCode刷题笔记（1-10）">
+                        <span class="hidden-mobile">LeetCode刷题笔记（1-10）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"NqLkpHFBS9O7Y93uzIhKoVbJ-gzGzoHsz","appKey":"zYtgzDmijXaZGw7JNyOX4Xd8","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量
+        <span id="leancloud-site-pv"></span>
+        次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数
+        <span id="leancloud-site-uv"></span>
+        人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
